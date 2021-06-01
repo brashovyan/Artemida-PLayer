@@ -1,0 +1,308 @@
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.IO;
+//через добавить ссылку в обозревателе решений добавил Windows.Forms
+
+namespace пробую
+{
+    public partial class MainWindow : Window
+    {
+        System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer(); //таймер
+        MediaPlayer player = new MediaPlayer(); //сам плеер
+        string[] files; //сами треки
+        int i; //какой по счету трек
+        string[] str5; //название песни
+        int[] rnd2; //массив для рандома
+        Random rnd = new Random(); //сам рандом
+        int j; //запоминает само рандомное число
+        bool k = false; //определяет включен ли рандом
+
+        public MainWindow()
+        {
+            InitializeComponent();  //изначальный выбор папки
+
+            i = 0;
+            button_r.Content = "Random: off";
+            while (i > -1)
+            {
+                System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
+                FBD.ShowDialog();
+                if (FBD.SelectedPath != "")
+                {
+                    files = Directory.GetFiles(FBD.SelectedPath);
+
+                    for (int b = 0; b < files.Length; b++)
+                    {
+                        str5 = files[b].Split('\\');
+                        lb1.Items.Add(str5[str5.Length - 1]);
+                    }
+                    break;
+                }
+                else
+                {
+                    MessageBox.Show("Вы ничего не выбрали!");
+                }
+            }
+            
+            timer.Tick += new EventHandler(timerTick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+            music();
+        }
+
+        private void music() //основная функция, которая включает песни
+        {
+            try
+            {
+                timer.Stop();
+                player.Volume = sl1.Value;
+
+                if (k == false)
+                {
+                    player.Open(new Uri(files[i], UriKind.Relative));
+                    str5 = files[i].Split('\\');
+                    song.Content = str5[str5.Length - 1].Remove(str5[str5.Length-1].Length-4);
+                    lb1.SelectedIndex = i;
+                    button_r.Content = "Random: выкл";
+                    player.Play();
+                }
+                else
+                {
+                    player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
+                    str5 = files[rnd2[i]].Split('\\');
+                    song.Content = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                    lb1.SelectedIndex = rnd2[i];
+                    button_r.Content = "Random: вкл";
+                    player.Play();         
+                }
+
+                p1.Visibility = Visibility.Visible;
+                r1.Visibility = Visibility.Hidden;
+                timer.Start();
+                sl2.Value = 0;          
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку.");
+            }
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e) //это нужно чтоб музыка не прерывалась
+        {
+            player.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) //следующая песня
+        {
+            player.Close();
+            if (i == files.Length - 1)
+            {
+                i = 0;
+                music();
+            }
+            else
+            {
+                i++;
+                music();
+            }
+        }
+
+        private void timerTick(object sender, EventArgs e) //автоматический переход на следующий трек
+        {
+            try
+            {
+                if (k == false)
+                {
+                    lb1.SelectedIndex = i;
+                }
+                else
+                {
+                    lb1.SelectedIndex = rnd2[i];
+                }
+
+                sl2.Maximum = TimeSpan.Parse(player.NaturalDuration.ToString()).TotalSeconds;
+                sl2.Value++; //он умный, за максимум выйти не может
+                lb2.Content = player.Position.ToString().Remove(8);
+                try
+                {
+                    lb3.Content = player.NaturalDuration.ToString().Remove(8);
+                }
+                catch (Exception)
+                {
+                    lb3.Content = player.NaturalDuration.ToString();
+                }
+
+                if (player.Position == player.NaturalDuration)
+                {
+                    player.Close();
+
+                    if (i == files.Length - 1)
+                    {
+                        i = 0;
+                        music();
+                    }
+                    else
+                    {
+                        i++;
+                        music();
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+                player.Close();
+
+                if (i == files.Length - 1)
+                {
+                    i = 0;
+                    music();
+                }
+                else
+                {
+                    i++;
+                    music();
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)   //пауза
+        {
+            player.Pause();
+            timer.Stop();
+            r1.Visibility = Visibility.Visible;
+            p1.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e) //продолжить
+        {
+            player.Play();
+            timer.Start();
+            p1.Visibility = Visibility.Visible;
+            r1.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e) //назад
+        {
+            player.Close();
+            if (i == 0)
+            {
+                i = files.Length-1;
+                music();
+            }
+            else
+            {
+                i--;
+                music();
+            }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папку
+        {
+            lb1.Items.Clear();
+            player.Close();
+            timer.Stop();
+            button_r.Content = "Random: выкл";
+            i = 0;
+            k = false;
+            while (i > -1)
+            {
+                System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
+                FBD.ShowDialog();
+                if (FBD.SelectedPath != "")
+                {
+                    files = Directory.GetFiles(FBD.SelectedPath);
+
+                    for (int b = 0; b < files.Length; b++)
+                    {
+                        str5 = files[b].Split('\\');
+                        lb1.Items.Add(str5[str5.Length - 1]);
+                    }
+
+                    break;
+                }
+                else
+                {
+                    MessageBox.Show("Вы ничего не выбрали!");
+                }
+            }
+            music();
+        }
+
+        private void sl1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //громкость
+        {
+            player.Volume = sl1.Value;
+        }
+
+        private void sl2_PreviewMouseUp(object sender, MouseButtonEventArgs e) //перемотка
+        {
+            player.Close();
+            timer.Stop();
+
+            player.Volume = sl1.Value; 
+            if (k == false)
+            {
+                player.Open(new Uri(files[i], UriKind.Relative));
+                player.Position = TimeSpan.FromSeconds(sl2.Value);
+                player.Play();
+            }
+            else
+            {
+                player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
+                player.Position = TimeSpan.FromSeconds(sl2.Value);
+                player.Play();
+            }
+            p1.Visibility = Visibility.Visible;
+            r1.Visibility = Visibility.Hidden;
+            timer.Start();
+        }
+        
+        private void Button_Click_5(object sender, RoutedEventArgs e) //random
+        {
+            
+            if (k == false)
+            {
+                k = true;
+                rnd2 = new int[files.Length];
+                for (int b = 0; b < files.Length; b++)
+                {
+                    rnd2[b] = -1;
+                }
+
+                for (int b = 0; b < files.Length; b++)
+                {
+
+                m:
+                    j = rnd.Next(files.Length);
+                    for (int b2 = 0; b2 < files.Length; b2++)
+                    {
+                        if (rnd2[b2] == j)
+                            goto m;
+                    }
+                    rnd2[b] = j;
+                }
+            }
+            else
+            {
+                k = false;
+                i = rnd2[i];
+            }
+            music();
+        }
+
+        private void lb1_MouseDoubleClick(object sender, MouseButtonEventArgs e) //выбор песни из списка
+        {
+            if (k == false)
+            {
+                i = lb1.SelectedIndex;
+            }
+            else
+            {
+                i = lb1.SelectedIndex;
+                k = false;
+            }
+            music();
+        }
+    }
+}

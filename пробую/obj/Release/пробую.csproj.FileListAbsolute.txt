@@ -1,0 +1,15 @@
+C:\Games\япву\пробую\пробую\bin\Release\пробую.exe.config
+C:\Games\япву\пробую\пробую\bin\Release\пробую.exe
+C:\Games\япву\пробую\пробую\bin\Release\пробую.pdb
+C:\Games\япву\пробую\пробую\obj\Release\MainWindow.g.cs
+C:\Games\япву\пробую\пробую\obj\Release\App.g.cs
+C:\Games\япву\пробую\пробую\obj\Release\пробую_MarkupCompile.cache
+C:\Games\япву\пробую\пробую\obj\Release\пробую_MarkupCompile.lref
+C:\Games\япву\пробую\пробую\obj\Release\MainWindow.baml
+C:\Games\япву\пробую\пробую\obj\Release\пробую.g.resources
+C:\Games\япву\пробую\пробую\obj\Release\пробую.Properties.Resources.resources
+C:\Games\япву\пробую\пробую\obj\Release\пробую.csproj.GenerateResource.cache
+C:\Games\япву\пробую\пробую\obj\Release\пробую.csproj.CoreCompileInputs.cache
+C:\Games\япву\пробую\пробую\obj\Release\пробую.exe
+C:\Games\япву\пробую\пробую\obj\Release\пробую.pdb
+C:\Games\япву\пробую\пробую\obj\Release\пробую.csproj.AssemblyReference.cache
