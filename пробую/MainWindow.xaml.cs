@@ -25,12 +25,13 @@ namespace пробую
 
             i = 0;
             button_r.Content = "Random: off";
-            while (i > -1)
+           
+            
+            System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
+            //FBD.ShowDialog();
+            //if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK) крч я это пичинил
+            if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
-                FBD.ShowDialog();
-                if (FBD.SelectedPath != "")
-                {
                     files = Directory.GetFiles(FBD.SelectedPath);
 
                     for (int b = 0; b < files.Length; b++)
@@ -38,13 +39,14 @@ namespace пробую
                         str5 = files[b].Split('\\');
                         lb1.Items.Add(str5[str5.Length - 1]);
                     }
-                    break;
-                }
-                else
-                {
-                    MessageBox.Show("Вы ничего не выбрали!");
-                }
+                   
             }
+            else
+            {
+                //MessageBox.Show("Вы ничего не выбрали!");
+                Environment.Exit(0);
+            }
+            
             
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -200,34 +202,43 @@ namespace пробую
 
         private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папку
         {
-            lb1.Items.Clear();
-            player.Close();
-            timer.Stop();
-            button_r.Content = "Random: выкл";
-            i = 0;
-            k = false;
-            while (i > -1)
-            {
+            //lb1.Items.Clear();
+            //player.Close();
+            //timer.Stop();
+            //button_r.Content = "Random: выкл";
+            //i = 0;
+            //k = false;
+            
                 System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
-                FBD.ShowDialog();
-                if (FBD.SelectedPath != "")
+                //FBD.ShowDialog();
+                if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     files = Directory.GetFiles(FBD.SelectedPath);
 
-                    for (int b = 0; b < files.Length; b++)
+                    lb1.Items.Clear();
+                    player.Close();
+                    timer.Stop();
+                    button_r.Content = "Random: выкл";
+                    i = 0;
+                    k = false;
+                song.Content = "";
+                lb2.Content = "00:00:00";
+                lb3.Content = "00:00:00";
+
+                for (int b = 0; b < files.Length; b++)
                     {
                         str5 = files[b].Split('\\');
                         lb1.Items.Add(str5[str5.Length - 1]);
                     }
-
-                    break;
+                    music();
+                   
                 }
                 else
                 {
                     MessageBox.Show("Вы ничего не выбрали!");
                 }
-            }
-            music();
+            
+            
         }
 
         private void sl1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //громкость
@@ -237,25 +248,32 @@ namespace пробую
 
         private void sl2_PreviewMouseUp(object sender, MouseButtonEventArgs e) //перемотка
         {
-            player.Close();
-            timer.Stop();
+            try
+            {
+                player.Close();
+                timer.Stop();
 
-            player.Volume = sl1.Value; 
-            if (k == false)
-            {
-                player.Open(new Uri(files[i], UriKind.Relative));
-                player.Position = TimeSpan.FromSeconds(sl2.Value);
-                player.Play();
+                player.Volume = sl1.Value;
+                if (k == false)
+                {
+                    player.Open(new Uri(files[i], UriKind.Relative));
+                    player.Position = TimeSpan.FromSeconds(sl2.Value);
+                    player.Play();
+                }
+                else
+                {
+                    player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
+                    player.Position = TimeSpan.FromSeconds(sl2.Value);
+                    player.Play();
+                }
+                p1.Visibility = Visibility.Visible;
+                r1.Visibility = Visibility.Hidden;
+                timer.Start();
             }
-            else
+            catch (Exception)
             {
-                player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
-                player.Position = TimeSpan.FromSeconds(sl2.Value);
-                player.Play();
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку.");
             }
-            p1.Visibility = Visibility.Visible;
-            r1.Visibility = Visibility.Hidden;
-            timer.Start();
         }
         
         private void Button_Click_5(object sender, RoutedEventArgs e) //random

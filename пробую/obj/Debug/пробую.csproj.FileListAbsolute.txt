@@ -12,3 +12,4 @@ C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.Genera
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.CoreCompileInputs.cache
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.exe
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.pdb
+C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.AssemblyReference.cache
