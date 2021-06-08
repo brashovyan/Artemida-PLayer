@@ -19,6 +19,8 @@ namespace пробую
         int j; //запоминает само рандомное число
         bool k = false; //определяет включен ли рандом
 
+        string[] str10; //нужно для проверки папки
+        int y; //нужно для проверки папки
         public MainWindow()
         {
             InitializeComponent();  //изначальный выбор папки
@@ -32,9 +34,35 @@ namespace пробую
             //if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK) крч я это пичинил
             if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                    files = Directory.GetFiles(FBD.SelectedPath);
+                y = 0;
+                str10 = Directory.GetFiles(FBD.SelectedPath);
+                for (int v = 0; v < str10.Length; v++)
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if(fi.Extension == ".mp3")
+                    {
+                        
+                        y++;
+                    }
+                    
+                }
 
-                    for (int b = 0; b < files.Length; b++)
+                files = new string[y];
+                y = 0;
+                for (int v = 0; v < str10.Length; v++)
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3")
+                    {
+                        files[y] = str10[v];
+                        y++;
+                    }
+
+                }
+
+                //files = Directory.GetFiles(FBD.SelectedPath);
+
+                for (int b = 0; b < files.Length; b++)
                     {
                         str5 = files[b].Split('\\');
                         lb1.Items.Add(str5[str5.Length - 1]);
@@ -46,7 +74,7 @@ namespace пробую
                 //MessageBox.Show("Вы ничего не выбрали!");
                 Environment.Exit(0);
             }
-            
+
             
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -86,7 +114,7 @@ namespace пробую
             }
             catch (Exception)
             {
-                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку.");
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
             }
         }
 
@@ -211,9 +239,35 @@ namespace пробую
             
                 System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
                 //FBD.ShowDialog();
-                if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                y = 0;
+                str10 = Directory.GetFiles(FBD.SelectedPath);
+                for (int v = 0; v < str10.Length; v++)
                 {
-                    files = Directory.GetFiles(FBD.SelectedPath);
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3")
+                    {
+
+                        y++;
+                    }
+
+                }
+
+                files = new string[y];
+                y = 0;
+                for (int v = 0; v < str10.Length; v++)
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3")
+                    {
+                        files[y] = str10[v];
+                        y++;
+                    }
+
+                }
+
+                //files = Directory.GetFiles(FBD.SelectedPath);
 
                     lb1.Items.Clear();
                     player.Close();
@@ -226,17 +280,17 @@ namespace пробую
                 lb3.Content = "00:00:00";
 
                 for (int b = 0; b < files.Length; b++)
-                    {
+                {
                         str5 = files[b].Split('\\');
                         lb1.Items.Add(str5[str5.Length - 1]);
-                    }
+                }
                     music();
                    
-                }
-                else
-                {
+            }
+            else
+            {
                     MessageBox.Show("Вы ничего не выбрали!");
-                }
+            }
             
             
         }
@@ -272,7 +326,7 @@ namespace пробую
             }
             catch (Exception)
             {
-                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку.");
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
             }
         }
         
