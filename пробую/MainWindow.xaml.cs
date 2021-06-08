@@ -228,7 +228,7 @@ namespace пробую
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папку
+        private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папкуy
         {
             //lb1.Items.Clear();
             //player.Close();
@@ -375,6 +375,7 @@ namespace пробую
                 k = false;
             }
             music();
+
         }
     }
 }
