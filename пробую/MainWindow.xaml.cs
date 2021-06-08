@@ -39,7 +39,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if(fi.Extension == ".mp3")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg")
                     {
                         
                         y++;
@@ -52,7 +52,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if (fi.Extension == ".mp3")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg")
                     {
                         files[y] = str10[v];
                         y++;
@@ -64,7 +64,7 @@ namespace пробую
 
                 for (int b = 0; b < files.Length; b++)
                     {
-                        str5 = files[b].Split('\\');
+                        str5 = files[b].ToString().Split('\\');
                         lb1.Items.Add(str5[str5.Length - 1]);
                     }
                    
@@ -246,7 +246,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if (fi.Extension == ".mp3")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg")
                     {
 
                         y++;
@@ -259,7 +259,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if (fi.Extension == ".mp3")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg")
                     {
                         files[y] = str10[v];
                         y++;
