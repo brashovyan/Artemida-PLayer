@@ -420,7 +420,9 @@ namespace пробую
 
         private void ser_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) //строка поиска
         {
-            if (ser.Text == "")
+            string searchText = ser.Text.ToLower();
+
+            if (searchText == "")
             {
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
@@ -433,7 +435,7 @@ namespace пробую
                 lb4.Items.Clear();
                 for (int b = 0; b < files.Length; b++)
                 {
-                    if (files[b].IndexOf(ser.Text) != -1)
+                    if (files[b].ToLower().IndexOf(searchText) != -1)
                     {
                         str5 = files[b].ToString().Split('\\');
                         lb4.Items.Add(str5[str5.Length - 1]);

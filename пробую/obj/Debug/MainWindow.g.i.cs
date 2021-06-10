@@ -41,7 +41,7 @@ namespace пробую {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 34 "..\..\MainWindow.xaml"
+        #line 38 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button p1;
         
@@ -49,7 +49,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 35 "..\..\MainWindow.xaml"
+        #line 39 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button r1;
         
@@ -57,7 +57,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 38 "..\..\MainWindow.xaml"
+        #line 42 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Slider sl1;
         
@@ -65,7 +65,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 39 "..\..\MainWindow.xaml"
+        #line 43 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button button_r;
         
@@ -73,7 +73,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 40 "..\..\MainWindow.xaml"
+        #line 44 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox lb1;
         
@@ -81,7 +81,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 41 "..\..\MainWindow.xaml"
+        #line 45 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox lb4;
         
@@ -89,7 +89,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 43 "..\..\MainWindow.xaml"
+        #line 47 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lb2;
         
@@ -97,7 +97,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 44 "..\..\MainWindow.xaml"
+        #line 48 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lb3;
         
@@ -105,7 +105,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 45 "..\..\MainWindow.xaml"
+        #line 49 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label song;
         
@@ -113,7 +113,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 46 "..\..\MainWindow.xaml"
+        #line 50 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Slider sl2;
         
@@ -121,7 +121,7 @@ namespace пробую {
         #line hidden
         
         
-        #line 47 "..\..\MainWindow.xaml"
+        #line 51 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox ser;
         
@@ -177,7 +177,7 @@ namespace пробую {
             case 3:
             this.p1 = ((System.Windows.Controls.Button)(target));
             
-            #line 34 "..\..\MainWindow.xaml"
+            #line 38 "..\..\MainWindow.xaml"
             this.p1.Click += new System.Windows.RoutedEventHandler(this.Button_Click_1);
             
             #line default
@@ -186,7 +186,7 @@ namespace пробую {
             case 4:
             this.r1 = ((System.Windows.Controls.Button)(target));
             
-            #line 35 "..\..\MainWindow.xaml"
+            #line 39 "..\..\MainWindow.xaml"
             this.r1.Click += new System.Windows.RoutedEventHandler(this.Button_Click_2);
             
             #line default
@@ -194,7 +194,7 @@ namespace пробую {
             return;
             case 5:
             
-            #line 36 "..\..\MainWindow.xaml"
+            #line 40 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click_3);
             
             #line default
@@ -202,7 +202,7 @@ namespace пробую {
             return;
             case 6:
             
-            #line 37 "..\..\MainWindow.xaml"
+            #line 41 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click_4);
             
             #line default
@@ -211,7 +211,7 @@ namespace пробую {
             case 7:
             this.sl1 = ((System.Windows.Controls.Slider)(target));
             
-            #line 38 "..\..\MainWindow.xaml"
+            #line 42 "..\..\MainWindow.xaml"
             this.sl1.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.sl1_ValueChanged);
             
             #line default
@@ -220,7 +220,7 @@ namespace пробую {
             case 8:
             this.button_r = ((System.Windows.Controls.Button)(target));
             
-            #line 39 "..\..\MainWindow.xaml"
+            #line 43 "..\..\MainWindow.xaml"
             this.button_r.Click += new System.Windows.RoutedEventHandler(this.Button_Click_5);
             
             #line default
@@ -229,7 +229,7 @@ namespace пробую {
             case 9:
             this.lb1 = ((System.Windows.Controls.ListBox)(target));
             
-            #line 40 "..\..\MainWindow.xaml"
+            #line 44 "..\..\MainWindow.xaml"
             this.lb1.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.lb1_MouseDoubleClick);
             
             #line default
@@ -238,7 +238,7 @@ namespace пробую {
             case 10:
             this.lb4 = ((System.Windows.Controls.ListBox)(target));
             
-            #line 41 "..\..\MainWindow.xaml"
+            #line 45 "..\..\MainWindow.xaml"
             this.lb4.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.lb4_MouseDoubleClick);
             
             #line default
@@ -256,7 +256,7 @@ namespace пробую {
             case 14:
             this.sl2 = ((System.Windows.Controls.Slider)(target));
             
-            #line 46 "..\..\MainWindow.xaml"
+            #line 50 "..\..\MainWindow.xaml"
             this.sl2.PreviewMouseUp += new System.Windows.Input.MouseButtonEventHandler(this.sl2_PreviewMouseUp);
             
             #line default
@@ -265,7 +265,7 @@ namespace пробую {
             case 15:
             this.ser = ((System.Windows.Controls.TextBox)(target));
             
-            #line 47 "..\..\MainWindow.xaml"
+            #line 51 "..\..\MainWindow.xaml"
             this.ser.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.ser_TextChanged);
             
             #line default
