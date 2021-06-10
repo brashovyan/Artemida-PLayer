@@ -21,6 +21,7 @@ namespace пробую
 
         string[] str10; //нужно для проверки папки
         int y; //нужно для проверки папки
+        //string[] str6; //для поиска
         public MainWindow()
         {
             InitializeComponent();  //изначальный выбор папки
@@ -75,7 +76,7 @@ namespace пробую
                 Environment.Exit(0);
             }
 
-            
+            //ser.IsEnabled = true;
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
             music();
@@ -129,11 +130,23 @@ namespace пробую
             if (i == files.Length - 1)
             {
                 i = 0;
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
+
                 music();
             }
             else
             {
                 i++;
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
+
                 music();
             }
         }
@@ -219,11 +232,23 @@ namespace пробую
             if (i == 0)
             {
                 i = files.Length-1;
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
+
                 music();
             }
             else
             {
                 i--;
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
+
                 music();
             }
         }
@@ -278,6 +303,11 @@ namespace пробую
                 song.Content = "";
                 lb2.Content = "00:00:00";
                 lb3.Content = "00:00:00";
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
 
                 for (int b = 0; b < files.Length; b++)
                 {
@@ -354,11 +384,21 @@ namespace пробую
                     }
                     rnd2[b] = j;
                 }
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
             }
             else
             {
                 k = false;
                 i = rnd2[i];
+
+                ser.Text = "";
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
             }
             music();
         }
@@ -376,6 +416,51 @@ namespace пробую
             }
             music();
 
+        }
+
+        private void ser_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) //строка поиска
+        {
+            if (ser.Text == "")
+            {
+                lb4.Items.Clear();
+                lb4.Visibility = Visibility.Hidden;
+                lb1.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lb4.Visibility = Visibility.Visible;
+                lb1.Visibility = Visibility.Hidden;
+                lb4.Items.Clear();
+                for (int b = 0; b < files.Length; b++)
+                {
+                    if (files[b].IndexOf(ser.Text) != -1)
+                    {
+                        str5 = files[b].ToString().Split('\\');
+                        lb4.Items.Add(str5[str5.Length - 1]);
+                    }
+                }
+            }
+        }
+
+        private void lb4_MouseDoubleClick(object sender, MouseButtonEventArgs e) //выбор песни из поиска
+        {
+            string str11 = lb4.SelectedItem.ToString();
+            for (int b = 0; b < files.Length; b++)
+            {
+               
+                if (files[b].ToString().Contains(str11))
+                {
+                    i = b;
+                    k = false;
+
+                    ser.Text = "";
+                    lb4.Items.Clear();
+                    lb4.Visibility = Visibility.Hidden;
+                    lb1.Visibility = Visibility.Visible;
+
+                    music();
+                }
+            }
         }
     }
 }

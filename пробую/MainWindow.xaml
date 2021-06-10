@@ -37,11 +37,14 @@
         <Button Content="Изменить папку"  Margin="10,10,10,10"   Click="Button_Click_4"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontFamily="Candara" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
         <Slider x:Name="sl1"  Margin="0,14,5,0"   Orientation="Horizontal" Minimum="0" Maximum="0.5" Value="0.5" ValueChanged="sl1_ValueChanged" Grid.Row="3"  Grid.Column="5"/>
         <Button x:Name="button_r" Content="Random" Margin="10,10,10,10"  Click="Button_Click_5"  Background="#FF514F4F" Foreground="White" BorderBrush="Black" FontFamily="Candara" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="lb1"   MouseDoubleClick="lb1_MouseDoubleClick" Margin="10,10,10,10" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="0" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8"/>
+        <ListBox x:Name="lb1"   MouseDoubleClick="lb1_MouseDoubleClick" Margin="10,47,10.4,9.6" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="0" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8"/>
+        <ListBox x:Name="lb4" Visibility="Hidden" Grid.ColumnSpan="8" Margin="31,58,30.4,65.6" MouseDoubleClick="lb4_MouseDoubleClick"/>
+
         <Label x:Name="lb2" Content="00:00:00"  Margin="10,0,0,0"  Foreground="White" FontSize="14" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         <Label x:Name="lb3" Content="00:00:00" Margin="0,0,0,0"  Foreground="White" FontSize="14" Grid.Row="2" Grid.Column="7"/>
         <Label x:Name="song" Content="Song" Margin="10,0,10,0" Foreground="White" FontSize="18" FontFamily="Consolas" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="8"/>
         <Slider x:Name="sl2" Grid.Column="0"  Margin="75,5,0,0" Grid.Row="2" Grid.ColumnSpan="7" Minimum="0" PreviewMouseUp="sl2_PreviewMouseUp"/>
+        <TextBox x:Name="ser" Grid.ColumnSpan="8" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="566" IsEnabled="True" TextChanged="ser_TextChanged"/>
 
     </Grid>
 </Window>
