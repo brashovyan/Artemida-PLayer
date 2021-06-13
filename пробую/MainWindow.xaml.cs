@@ -155,14 +155,14 @@ namespace пробую
         {
             try
             {
-                if (k == false)
+                /*if (k == false)
                 {
                     lb1.SelectedIndex = i;
                 }
                 else
                 {
                     lb1.SelectedIndex = rnd2[i];
-                }
+                }*/
 
                 sl2.Maximum = TimeSpan.Parse(player.NaturalDuration.ToString()).TotalSeconds;
                 sl2.Value++; //он умный, за максимум выйти не может
@@ -253,7 +253,7 @@ namespace пробую
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папкуy
+        private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папку
         {
             //lb1.Items.Clear();
             //player.Close();
@@ -362,7 +362,6 @@ namespace пробую
         
         private void Button_Click_5(object sender, RoutedEventArgs e) //random
         {
-            
             if (k == false)
             {
                 k = true;
@@ -403,7 +402,7 @@ namespace пробую
             music();
         }
 
-        private void lb1_MouseDoubleClick(object sender, MouseButtonEventArgs e) //выбор песни из списка
+        private void lb1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (k == false)
             {
@@ -415,54 +414,61 @@ namespace пробую
                 k = false;
             }
             music();
-
         }
 
         private void ser_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) //строка поиска
         {
-            string searchText = ser.Text.ToLower();
+            try
+            {
+                string searchText = ser.Text.ToLower();
 
-            if (searchText == "")
-            {
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                lb4.Visibility = Visibility.Visible;
-                lb1.Visibility = Visibility.Hidden;
-                lb4.Items.Clear();
-                for (int b = 0; b < files.Length; b++)
+                if (searchText == "")
                 {
-                    if (files[b].ToLower().IndexOf(searchText) != -1)
-                    {
-                        str5 = files[b].ToString().Split('\\');
-                        lb4.Items.Add(str5[str5.Length - 1]);
-                    }
-                }
-            }
-        }
-
-        private void lb4_MouseDoubleClick(object sender, MouseButtonEventArgs e) //выбор песни из поиска
-        {
-            string str11 = lb4.SelectedItem.ToString();
-            for (int b = 0; b < files.Length; b++)
-            {
-               
-                if (files[b].ToString().Contains(str11))
-                {
-                    i = b;
-                    k = false;
-
-                    ser.Text = "";
                     lb4.Items.Clear();
                     lb4.Visibility = Visibility.Hidden;
                     lb1.Visibility = Visibility.Visible;
-
-                    music();
+                }
+                else
+                {
+                    lb4.Visibility = Visibility.Visible;
+                    lb1.Visibility = Visibility.Hidden;
+                    lb4.Items.Clear();
+                    for (int b = 0; b < files.Length; b++)
+                    {
+                        if (files[b].ToLower().IndexOf(searchText) != -1)
+                        {
+                            str5 = files[b].ToString().Split('\\');
+                            lb4.Items.Add(str5[str5.Length - 1]);
+                        }
+                    }
                 }
             }
+            catch (Exception) { }
+        }
+
+        private void lb4_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                string str11 = lb4.SelectedItem.ToString();
+                for (int b = 0; b < files.Length; b++)
+                {
+
+                    if (files[b].ToString().Contains(str11))
+                    {
+                        i = b;
+                        k = false;
+
+                        ser.Text = "";
+                        lb4.Items.Clear();
+                        lb4.Visibility = Visibility.Hidden;
+                        lb1.Visibility = Visibility.Visible;
+
+                        music();
+                    }
+                }
+            }
+            catch (Exception) { }
         }
     }
 }
