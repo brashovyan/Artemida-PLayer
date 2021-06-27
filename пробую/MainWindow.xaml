@@ -45,7 +45,8 @@
 
         <Label x:Name="lb2" Content="00:00:00"  Margin="10,1.2,75.6,45"  Foreground="White" FontSize="14" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
         <Label x:Name="lb3" Content="00:00:00" Margin="0.4,1.2,0.4,45"  Foreground="White" FontSize="14" Grid.Row="3" Grid.Column="7" Grid.RowSpan="2"/>
-        <Label x:Name="song" Content="Song" Margin="0,0,0,0" Foreground="White" FontSize="18" FontFamily="Consolas" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="2"/>
+        <Label x:Name="song" Margin="0,0,0,0" Foreground="White" FontSize="18" FontFamily="Consolas" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="2">
+        </Label>
         <Slider x:Name="sl2" Grid.Column="0"  Margin="75,6.2,80.4,45" Grid.Row="3" Grid.ColumnSpan="8" Minimum="0" PreviewMouseUp="sl2_PreviewMouseUp" Grid.RowSpan="2"/>
         <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="0,0,0,0" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Row="0" Grid.Column="0" />
 

@@ -1,0 +1,15 @@
+﻿<Window x:Class="пробую.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:пробую"
+        mc:Ignorable="d"
+        Title="Window1" Height="243.792" Width="447.517">
+    <Grid>
+        <Button Content="Да" HorizontalAlignment="Left" Height="39" Margin="25,129,0,0" VerticalAlignment="Top" Width="128" Click="Button_Click" IsDefault="True"/>
+        <Button Content="Нет" HorizontalAlignment="Left" Height="39" Margin="288,129,0,0" VerticalAlignment="Top" Width="128" IsCancel="True"/>
+        <Label Content="Вы хотите сохранить эту папку и сделать её по умолчанию?" HorizontalAlignment="Left" Height="101" Margin="10,10,0,0" VerticalAlignment="Top" Width="406" FontSize="14" />
+
+    </Grid>
+</Window>

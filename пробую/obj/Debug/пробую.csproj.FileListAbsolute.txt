@@ -13,3 +13,5 @@ C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.CoreCo
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.exe
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.pdb
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.AssemblyReference.cache
+C:\Games\япву\пробую\пробую\obj\Debug\Window1.g.cs
+C:\Games\япву\пробую\пробую\obj\Debug\Window1.baml
