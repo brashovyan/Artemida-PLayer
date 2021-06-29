@@ -40,15 +40,21 @@
         <Button Content="Изменить папку"  Margin="10,10.6,9.6,10"   Click="Button_Click_4"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontFamily="Candara" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
         <Slider x:Name="sl1"  Margin="0,14.6,5.4,0"   Orientation="Horizontal" Minimum="0" Maximum="0.5" Value="0.5" ValueChanged="sl1_ValueChanged" Grid.Row="4"  Grid.Column="5"/>
         <Button x:Name="button_r" Content="Random" Margin="9.6,10.6,10.4,10"  Click="Button_Click_5"  Background="#FF514F4F" Foreground="White" BorderBrush="Black" FontFamily="Candara" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="lb1" Margin="0,10,0,0" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8" MouseLeftButtonUp="lb1_MouseLeftButtonUp"/>
-        <ListBox x:Name="lb4" Visibility="Hidden" Grid.ColumnSpan="8" Margin="0,10,0,0" Grid.Row="1" PreviewMouseLeftButtonUp="lb4_PreviewMouseLeftButtonUp"/>
+        <ListBox x:Name="lb1" Margin="0,48,0.4,0.4" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8" MouseLeftButtonUp="lb1_MouseLeftButtonUp"/>
+        <ListBox x:Name="lb4" Visibility="Hidden" Grid.ColumnSpan="8" Margin="0,48,0.4,0.4" Grid.Row="1" PreviewMouseLeftButtonUp="lb4_PreviewMouseLeftButtonUp" Grid.Column="0"/>
 
         <Label x:Name="lb2" Content="00:00:00"  Margin="10,1.2,75.6,45"  Foreground="White" FontSize="14" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
         <Label x:Name="lb3" Content="00:00:00" Margin="0.4,1.2,0.4,45"  Foreground="White" FontSize="14" Grid.Row="3" Grid.Column="7" Grid.RowSpan="2"/>
         <Label x:Name="song" Margin="0,0,0,0" Foreground="White" FontSize="18" FontFamily="Consolas" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="2">
         </Label>
         <Slider x:Name="sl2" Grid.Column="0"  Margin="75,6.2,80.4,45" Grid.Row="3" Grid.ColumnSpan="8" Minimum="0" PreviewMouseUp="sl2_PreviewMouseUp" Grid.RowSpan="2"/>
-        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="0,0,0,0" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Row="0" Grid.Column="0" />
+        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="0,10,-0.6,200.4" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Row="1" Grid.Column="0" />
+        <Menu Grid.ColumnSpan="8" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="587" Margin="0,0,-0.6,0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Изменить или удалить папку по умолчанию" />
+                <MenuItem Header="О программе" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>

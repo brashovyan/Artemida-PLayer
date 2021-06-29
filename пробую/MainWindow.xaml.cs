@@ -476,6 +476,7 @@ namespace пробую
             try
             {
                 string searchText = ser.Text.ToLower();
+              
 
                 if (searchText == "")
                 {
@@ -490,7 +491,7 @@ namespace пробую
                     lb4.Items.Clear();
                     for (int b = 0; b < files.Length; b++)
                     {
-                        if (files[b].ToLower().IndexOf(searchText) != -1)
+                        if (files[b].ToString().ToLower().Contains(searchText))
                         {
                             str5 = files[b].ToString().Split('\\');
                             lb4.Items.Add(str5[str5.Length - 1]);
@@ -541,6 +542,11 @@ namespace пробую
 
                 music();
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Artemida player");
         }
     }
 }
