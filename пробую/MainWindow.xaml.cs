@@ -18,13 +18,9 @@ namespace пробую
         Random rnd = new Random(); //сам рандом
         int j; //запоминает само рандомное число
         bool k = false; //определяет включен ли рандом
-
         string[] str10 = null; //нужно для проверки папки
         int y; //нужно для проверки папки
-        //string[] str6; //для поиска
-        int p;
-        
-       
+        int p; //ждем 5 секунд, чтобыпесня прогрузилась  
 
         public MainWindow()
         {
@@ -32,34 +28,24 @@ namespace пробую
 
             i = 0;
             button_r.Content = "Random: off";
-            //Properties.Settings.Default.papka2 = "";
             h:
             if (Properties.Settings.Default.papka3 == "")
             {
-            
                 System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
                 if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     str10 = Directory.GetFiles(FBD.SelectedPath);
-                    
                     Window1 w1 = new Window1();
-
                     if (w1.ShowDialog() == true)
                     {
                         Properties.Settings.Default.papka3 = FBD.SelectedPath;
                         Properties.Settings.Default.Save();
                     }
-
-
-
-                      
-
                 }
                 else
                 {
                     Environment.Exit(0);
                 }
-
             }
             else
             {
@@ -75,55 +61,39 @@ namespace пробую
                     goto h;
                 }
             }
-            
-            // System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
-            //FBD.ShowDialog();
-            //if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK) крч я это пичинил
 
+            y = 0;                   
+            for (int v = 0; v < str10.Length; v++)
+            {
+                FileInfo fi = new FileInfo(str10[v]);
+                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                {
+                    y++;
+                }
+            }
 
-
+            files = new string[y];
             y = 0;
-                    
-                    for (int v = 0; v < str10.Length; v++)
-                    {
-                        FileInfo fi = new FileInfo(str10[v]);
-                        if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
-                        {
+            for (int v = 0; v < str10.Length; v++)
+            {
+                FileInfo fi = new FileInfo(str10[v]);
+                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                {
+                    files[y] = str10[v];
+                    y++;
+                }
 
-                            y++;
-                        }
+            }
 
-                    }
+            for (int b = 0; b < files.Length; b++)
+            {
+                str5 = files[b].ToString().Split('\\');
+                lb1.Items.Add(str5[str5.Length - 1]);
+            }
 
-                    files = new string[y];
-                    y = 0;
-                    for (int v = 0; v < str10.Length; v++)
-                    {
-                        FileInfo fi = new FileInfo(str10[v]);
-                        if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
-                        {
-                            files[y] = str10[v];
-                            y++;
-                        }
-
-                    }
-
-                    for (int b = 0; b < files.Length; b++)
-                    {
-                        str5 = files[b].ToString().Split('\\');
-                        lb1.Items.Add(str5[str5.Length - 1]);
-                    }
-
-                
-              
-            
-
-            //ser.IsEnabled = true;
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
-           
             music();
-           
         }
 
         private void music() //основная функция, которая включает песни
@@ -154,8 +124,7 @@ namespace пробую
                 }
 
                 p1.Visibility = Visibility.Visible;
-                r1.Visibility = Visibility.Hidden;
-              
+                r1.Visibility = Visibility.Hidden;          
                 sl2.Value = 0;
                 timer.Start();
             }
@@ -176,25 +145,19 @@ namespace пробую
             if (i == files.Length - 1)
             {
                 i = 0;
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
-           
-
                 music();
             }
             else
             {
                 i++;
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
-              
-
                 music();
             }
         }
@@ -203,31 +166,19 @@ namespace пробую
         {
             try
             {
-                /*if (k == false)
+                sl2.Maximum = TimeSpan.Parse(player.NaturalDuration.ToString()).TotalSeconds;
+                try
                 {
-                    lb1.SelectedIndex = i;
+                    lb3.Content = player.NaturalDuration.ToString().Remove(8);
                 }
-                else
+                catch (Exception)
                 {
-                    lb1.SelectedIndex = rnd2[i];
-                }*/
-               
-                    sl2.Maximum = TimeSpan.Parse(player.NaturalDuration.ToString()).TotalSeconds;
-                    try
-                    {
-                        lb3.Content = player.NaturalDuration.ToString().Remove(8);
-                    }
-                    catch (Exception)
-                    {
-                        lb3.Content = player.NaturalDuration.ToString();
-                    }
-                    
-                
-                
+                    lb3.Content = player.NaturalDuration.ToString();
+                }
+                     
                 sl2.Value++; //он умный, за максимум выйти не может
                 lb2.Content = player.Position.ToString().Remove(8);
                 
-
                 if (player.Position == player.NaturalDuration)
                 {
                     player.Close();
@@ -235,38 +186,34 @@ namespace пробую
                     if (i == files.Length - 1)
                     {
                         i = 0;
-                       
                         music();
                     }
                     else
                     {
                         i++;
-                      
                         music();
                     }
                 }
-                
             }
             catch (Exception)
             {
-                /* player.Close();
-
-                 if (i == files.Length - 1)
-                 {
-                     i = 0;
-
-                     music();
-                 }
-                 else
-                 {
-                     i++;
-
-                     music();
-                 }*/
                 if (p != 5)
                     p++;
                 else
-                    close();
+                {
+                    player.Close();
+
+                    if (i == files.Length - 1)
+                    {
+                        i = 0;
+                        music();
+                    }
+                    else
+                    {
+                        i++;
+                        music();
+                    }
+                }
             }
         }
 
@@ -288,44 +235,30 @@ namespace пробую
 
         private void Button_Click_3(object sender, RoutedEventArgs e) //назад
         {
-            //Properties.Settings.Default.papka = "Hello!";
-           // Properties.Settings.Default.Save();
             player.Close();
             if (i == 0)
             {
                 i = files.Length-1;
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
-                
                 music();
             }
             else
             {
                 i--;
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
-                
                 music();
             }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e) //изменить папку
         {
-            //lb1.Items.Clear();
-            //player.Close();
-            //timer.Stop();
-            //button_r.Content = "Random: выкл";
-            //i = 0;
-            //k = false;
-            
-                System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
-                //FBD.ShowDialog();
+            System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
             if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 y = 0;
@@ -335,10 +268,8 @@ namespace пробую
                     FileInfo fi = new FileInfo(str10[v]);
                     if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
                     {
-
                         y++;
                     }
-
                 }
 
                 files = new string[y];
@@ -351,21 +282,17 @@ namespace пробую
                         files[y] = str10[v];
                         y++;
                     }
-
                 }
 
-                //files = Directory.GetFiles(FBD.SelectedPath);
-
-                    lb1.Items.Clear();
-                    player.Close();
-                    timer.Stop();
-                    button_r.Content = "Random: выкл";
-                    i = 0;
-                    k = false;
+                lb1.Items.Clear();
+                player.Close();
+                timer.Stop();
+                button_r.Content = "Random: выкл";
+                i = 0;
+                k = false;
                 song.Content = "";
                 lb2.Content = "00:00:00";
                 lb3.Content = "00:00:00";
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
@@ -373,18 +300,15 @@ namespace пробую
 
                 for (int b = 0; b < files.Length; b++)
                 {
-                        str5 = files[b].Split('\\');
-                        lb1.Items.Add(str5[str5.Length - 1]);
+                    str5 = files[b].Split('\\');
+                    lb1.Items.Add(str5[str5.Length - 1]);
                 }
-                    music();
-                   
+                music(); 
             }
             else
             {
                     MessageBox.Show("Вы ничего не выбрали!");
             }
-            
-            
         }
 
         private void sl1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //громкость
@@ -396,15 +320,9 @@ namespace пробую
         {
             try
             {
-               
                 timer.Stop();
-
                 player.Volume = sl1.Value;
-               
-         
                 player.Position = TimeSpan.FromSeconds(sl2.Value);
-                 
-                
                 p1.Visibility = Visibility.Visible;
                 r1.Visibility = Visibility.Hidden;
                 timer.Start();
@@ -428,7 +346,6 @@ namespace пробую
 
                 for (int b = 0; b < files.Length; b++)
                 {
-
                 m:
                     j = rnd.Next(files.Length);
                     for (int b2 = 0; b2 < files.Length; b2++)
@@ -448,7 +365,6 @@ namespace пробую
             {
                 k = false;
                 i = rnd2[i];
-
                 ser.Text = "";
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
@@ -477,7 +393,6 @@ namespace пробую
             {
                 string searchText = ser.Text.ToLower();
               
-
                 if (searchText == "")
                 {
                     lb4.Items.Clear();
@@ -509,44 +424,61 @@ namespace пробую
                 string str11 = lb4.SelectedItem.ToString();
                 for (int b = 0; b < files.Length; b++)
                 {
-
                     if (files[b].ToString().Contains(str11))
                     {
                         i = b;
                         k = false;
-
                         ser.Text = "";
                         lb4.Items.Clear();
                         lb4.Visibility = Visibility.Hidden;
                         lb1.Visibility = Visibility.Visible;
-
                         music();
                     }
                 }
             }
             catch (Exception) { }
         }
-        private void close()
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e) //файл, о программе
         {
-            player.Close();
+            Window2 w2 = new Window2();
+            w2.ShowDialog();
+        }
 
-            if (i == files.Length - 1)
+        private void lb1_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) //запрещаем пкм в списке песен
+        {
+            e.Handled = true;
+        }
+
+        private void lb4_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) //запрещаем пкм в списке песен
+        {
+            e.Handled = true;
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e) //удалить папку по умолчанию
+        {
+            Properties.Settings.Default.papka3 = "";
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Удалено!");
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e) //изменение папки по умолчанию
+        {
+            System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
+            if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                i = 0;
-
-                music();
-            }
-            else
-            {
-                i++;
-
-                music();
+                Properties.Settings.Default.papka3 = FBD.SelectedPath;
+                Properties.Settings.Default.Save();
+                MessageBox.Show("Изменено!");
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e) //текущая папка по умолчанию
         {
-            MessageBox.Show("Artemida player");
+            if(Properties.Settings.Default.papka3!="")
+                MessageBox.Show(Properties.Settings.Default.papka3);
+            else
+                MessageBox.Show("Нет папки по умолчанию.");
         }
     }
 }

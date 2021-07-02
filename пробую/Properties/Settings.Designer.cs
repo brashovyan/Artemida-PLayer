@@ -34,5 +34,14 @@ namespace пробую.Properties {
                 this["papka3"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.3")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+        }
     }
 }

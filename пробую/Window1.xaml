@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:пробую"
         mc:Ignorable="d"
-        Title="Window1" Height="243.792" Width="447.517">
+        Title="Сохранение" Height="156.589" Width="409.073">
     <Grid>
-        <Button Content="Да" HorizontalAlignment="Left" Height="39" Margin="25,129,0,0" VerticalAlignment="Top" Width="128" Click="Button_Click" IsDefault="True"/>
-        <Button Content="Нет" HorizontalAlignment="Left" Height="39" Margin="288,129,0,0" VerticalAlignment="Top" Width="128" IsCancel="True"/>
-        <Label Content="Вы хотите сохранить эту папку и сделать её по умолчанию?" HorizontalAlignment="Left" Height="101" Margin="10,10,0,0" VerticalAlignment="Top" Width="406" FontSize="14" />
+        <Button Content="Да" HorizontalAlignment="Left" Height="39" Margin="10,61,0,0" VerticalAlignment="Top" Width="128" Click="Button_Click" IsDefault="True" FontSize="16"/>
+        <Button Content="Нет" HorizontalAlignment="Left" Height="39" Margin="257,61,0,0" VerticalAlignment="Top" Width="128" IsCancel="True" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" TextWrapping="Wrap" Text="Вы хотите сделать эту папку по умолчанию?" VerticalAlignment="Top" Width="375" FontSize="18"/>
 
     </Grid>
 </Window>

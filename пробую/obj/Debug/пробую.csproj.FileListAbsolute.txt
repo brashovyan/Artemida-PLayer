@@ -12,6 +12,7 @@ C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.Genera
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.CoreCompileInputs.cache
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.exe
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.pdb
-C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.AssemblyReference.cache
 C:\Games\япву\пробую\пробую\obj\Debug\Window1.g.cs
 C:\Games\япву\пробую\пробую\obj\Debug\Window1.baml
+C:\Games\япву\пробую\пробую\obj\Debug\Window2.g.cs
+C:\Games\япву\пробую\пробую\obj\Debug\Window2.baml
