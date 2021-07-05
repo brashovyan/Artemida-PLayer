@@ -176,7 +176,6 @@ namespace пробую
                     lb3.Content = player.NaturalDuration.ToString();
                 }
                 sl2.Value = TimeSpan.Parse(player.Position.ToString()).TotalSeconds;
-                //sl2.Value++; //он умный, за максимум выйти не может
                 lb2.Content = player.Position.ToString().Remove(8);
                 
                 if (player.Position == player.NaturalDuration)
@@ -307,7 +306,6 @@ namespace пробую
             }
             else
             {
-                    MessageBox.Show("Вы ничего не выбрали!");
             }
         }
 
