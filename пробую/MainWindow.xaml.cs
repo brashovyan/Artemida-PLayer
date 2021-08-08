@@ -3,13 +3,16 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.IO;
+using System.Windows.Threading;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 //через добавить ссылку в обозревателе решений добавил Windows.Forms
 
 namespace пробую
 {
     public partial class MainWindow : Window
     {
-        System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer(); //таймер
+        DispatcherTimer timer = new DispatcherTimer(); //таймер
         MediaPlayer player = new MediaPlayer(); //сам плеер
         string[] files; //сами треки
         int i; //какой по счету трек
@@ -21,6 +24,7 @@ namespace пробую
         string[] str10 = null; //нужно для проверки папки
         int y; //нужно для проверки папки
         int p; //ждем 5 секунд, чтобыпесня прогрузилась  
+        bool r = false; //для конопки повтора
 
         public MainWindow()
         {
@@ -108,7 +112,17 @@ namespace пробую
                 {
                     player.Open(new Uri(files[i], UriKind.Relative));
                     str5 = files[i].Split('\\');
-                    song.Content = str5[str5.Length - 1].Remove(str5[str5.Length-1].Length-4);
+                    //song.Content = str5[str5.Length - 1].Remove(str5[str5.Length-1].Length-4);
+                    textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+
+
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 570;
+                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1)*11;
+                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+
                     lb1.SelectedIndex = i;
                     button_r.Content = "Random: выкл";
                     player.Play();
@@ -117,7 +131,16 @@ namespace пробую
                 {
                     player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
                     str5 = files[rnd2[i]].Split('\\');
-                    song.Content = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                    //song.Content = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                    textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 570;
+                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1) * 11;
+                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+
                     lb1.SelectedIndex = rnd2[i];
                     button_r.Content = "Random: вкл";
                     player.Play();         
@@ -180,16 +203,24 @@ namespace пробую
                 
                 if (player.Position == player.NaturalDuration)
                 {
-                    player.Close();
-
-                    if (i == files.Length - 1)
+                    if (r == false)
                     {
-                        i = 0;
-                        music();
+                        player.Close();
+
+                        if (i == files.Length - 1)
+                        {
+                            i = 0;
+                            music();
+                        }
+                        else
+                        {
+                            i++;
+                            music();
+                        }
                     }
                     else
                     {
-                        i++;
+                        player.Close();
                         music();
                     }
                 }
@@ -200,16 +231,24 @@ namespace пробую
                     p++;
                 else
                 {
-                    player.Close();
-
-                    if (i == files.Length - 1)
+                    if (r == false)
                     {
-                        i = 0;
-                        music();
+                        player.Close();
+
+                        if (i == files.Length - 1)
+                        {
+                            i = 0;
+                            music();
+                        }
+                        else
+                        {
+                            i++;
+                            music();
+                        }
                     }
                     else
                     {
-                        i++;
+                        player.Close();
                         music();
                     }
                 }
@@ -289,7 +328,8 @@ namespace пробую
                 button_r.Content = "Random: выкл";
                 i = 0;
                 k = false;
-                song.Content = "";
+                //song.Content = "";
+                textbl.Text = "";
                 lb2.Content = "00:00:00";
                 lb3.Content = "00:00:00";
                 ser.Text = "";
@@ -477,6 +517,20 @@ namespace пробую
                 MessageBox.Show(Properties.Settings.Default.papka3);
             else
                 MessageBox.Show("Нет папки по умолчанию.");
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e) //конпка повтора
+        {
+            r = true;
+            rep_off.Visibility = Visibility.Hidden;
+            rep_on.Visibility = Visibility.Visible;    
+        }
+
+        private void rep_on_Click(object sender, RoutedEventArgs e)
+        {
+            r = false;
+            rep_off.Visibility = Visibility.Visible;
+            rep_on.Visibility = Visibility.Hidden;
         }
     }
 }
