@@ -13,6 +13,7 @@ namespace пробую
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer(); //таймер
+        DispatcherTimer timer2 = new DispatcherTimer();
         MediaPlayer player = new MediaPlayer(); //сам плеер
         string[] files; //сами треки
         int i; //какой по счету трек
@@ -25,6 +26,7 @@ namespace пробую
         int y; //нужно для проверки папки
         int p; //ждем 5 секунд, чтобыпесня прогрузилась  
         bool r = false; //для конопки повтора
+        int t;
 
         public MainWindow()
         {
@@ -97,6 +99,9 @@ namespace пробую
 
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
+
+            timer2.Tick += new EventHandler(timerTick2);
+            timer2.Interval = new TimeSpan(0, 0, 5);
             music();
         }
 
@@ -106,22 +111,20 @@ namespace пробую
             {
                 p = 0;
                 timer.Stop();
+                timer2.Stop();
                 player.Volume = sl1.Value;
-
+                t = 0;
                 if (k == false)
                 {
                     player.Open(new Uri(files[i], UriKind.Relative));
                     str5 = files[i].Split('\\');
-                    //song.Content = str5[str5.Length - 1].Remove(str5[str5.Length-1].Length-4);
+                   
+                   
+
                     textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
 
-
-                    DoubleAnimation doubleAnimation = new DoubleAnimation();
-                    doubleAnimation.From = 570;
-                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1)*11;
-                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
-                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+                    
+                    textbl.BeginAnimation(Canvas.LeftProperty, null); //остановка анимации
 
                     lb1.SelectedIndex = i;
                     button_r.Content = "Random: выкл";
@@ -131,15 +134,12 @@ namespace пробую
                 {
                     player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
                     str5 = files[rnd2[i]].Split('\\');
-                    //song.Content = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                  
+
                     textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
 
-                    DoubleAnimation doubleAnimation = new DoubleAnimation();
-                    doubleAnimation.From = 570;
-                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1) * 11;
-                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
-                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+                    textbl.BeginAnimation(Canvas.LeftProperty, null);
+
 
                     lb1.SelectedIndex = rnd2[i];
                     button_r.Content = "Random: вкл";
@@ -150,6 +150,7 @@ namespace пробую
                 r1.Visibility = Visibility.Hidden;          
                 sl2.Value = 0;
                 timer.Start();
+                timer2.Start();
             }
             catch (Exception)
             {
@@ -253,6 +254,8 @@ namespace пробую
                     }
                 }
             }
+
+           
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)   //пауза
@@ -531,6 +534,76 @@ namespace пробую
             r = false;
             rep_off.Visibility = Visibility.Visible;
             rep_on.Visibility = Visibility.Hidden;
+        }
+
+        private void timerTick2(object sender, EventArgs e)
+        {
+            if (t == 0)
+            {
+                DoubleAnimation doubleAnimation = new DoubleAnimation();
+                doubleAnimation.From = 0;
+                doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1) * 11;
+                doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
+                doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+                t++;
+
+            }
+            else if (t == 3)
+            {
+                DoubleAnimation doubleAnimation = new DoubleAnimation();
+                doubleAnimation.From = 570;
+                doubleAnimation.To = 0;
+                doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
+                doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+                t++;
+            }
+            else if (t == 6)
+            {
+                t = 0;
+            }
+            else
+            {
+                t++;
+            }
+
+            /*if (t == 5)
+            {
+                t = 0;
+                t2++;
+                if (t2 == 1)
+                {
+
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 0;
+                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1) * 11;
+                    doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+                }
+                else if (t2 == 4)
+                {
+                    DoubleAnimation doubleAnimation = new DoubleAnimation();
+                    doubleAnimation.From = 570;
+                    doubleAnimation.To = 0;
+                    doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
+                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+
+                }
+                else if (t2 == 8)
+                {
+                    t2 = 0;
+                }
+
+
+
+
+
+            }
+            else
+                t++;*/
         }
     }
 }

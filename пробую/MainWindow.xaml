@@ -47,7 +47,7 @@
         <Label x:Name="lb2" Content="00:00:00"  Margin="10,1.2,0.4,47"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="0" Grid.RowSpan="2"/>
         <Label x:Name="lb3" Content="00:00:00" Margin="0.4,1.2,0.4,47"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="7" Grid.RowSpan="2"/>
         <Canvas x:Name="Canvas" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="3" Margin="10,0,10.4,31.8" Grid.RowSpan="2">
-            <TextBlock x:Name="textbl" Margin="0,7,0,0" FontSize="19" Foreground="White" Text="Тестовый текст" Canvas.Right="0" FontFamily="Consolas">
+            <TextBlock x:Name="textbl" Margin="0,7,0,0" FontSize="19" Foreground="White" Text="Тестовый текст" Canvas.Left="0" FontFamily="Consolas">
                 <!--TextBlock.Triggers>
                     <EventTrigger RoutedEvent="TextBlock.Loaded">
                         <EventTrigger.Actions>
