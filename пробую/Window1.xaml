@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:пробую"
         mc:Ignorable="d"
-        Title="Сохранение" Height="156.589" Width="409.073">
+        Title="Сохранение" Height="156.589" Width="409.073" ResizeMode="CanMinimize">
     <Grid>
         <Button Content="Да" HorizontalAlignment="Left" Height="39" Margin="10,61,0,0" VerticalAlignment="Top" Width="128" Click="Button_Click" IsDefault="True" FontSize="16"/>
         <Button Content="Нет" HorizontalAlignment="Left" Height="39" Margin="257,61,0,0" VerticalAlignment="Top" Width="128" IsCancel="True" FontSize="16"/>

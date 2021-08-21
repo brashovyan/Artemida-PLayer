@@ -118,14 +118,8 @@ namespace пробую
                 {
                     player.Open(new Uri(files[i], UriKind.Relative));
                     str5 = files[i].Split('\\');
-                   
-                   
-
                     textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
-
-                    
                     textbl.BeginAnimation(Canvas.LeftProperty, null); //остановка анимации
-
                     lb1.SelectedIndex = i;
                     button_r.Content = "Random: выкл";
                     player.Play();
@@ -134,13 +128,8 @@ namespace пробую
                 {
                     player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
                     str5 = files[rnd2[i]].Split('\\');
-                  
-
                     textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
-
                     textbl.BeginAnimation(Canvas.LeftProperty, null);
-
-
                     lb1.SelectedIndex = rnd2[i];
                     button_r.Content = "Random: вкл";
                     player.Play();         
@@ -254,8 +243,6 @@ namespace пробую
                     }
                 }
             }
-
-           
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)   //пауза
@@ -366,6 +353,7 @@ namespace пробую
                 player.Position = TimeSpan.FromSeconds(sl2.Value);
                 p1.Visibility = Visibility.Visible;
                 r1.Visibility = Visibility.Hidden;
+                player.Play();
                 timer.Start();
             }
             catch (Exception)
@@ -529,14 +517,14 @@ namespace пробую
             rep_on.Visibility = Visibility.Visible;    
         }
 
-        private void rep_on_Click(object sender, RoutedEventArgs e)
+        private void rep_on_Click(object sender, RoutedEventArgs e) //кнопка повтора
         {
             r = false;
             rep_off.Visibility = Visibility.Visible;
             rep_on.Visibility = Visibility.Hidden;
         }
 
-        private void timerTick2(object sender, EventArgs e)
+        private void timerTick2(object sender, EventArgs e) //анимация
         {
             if (t == 0)
             {
@@ -547,12 +535,11 @@ namespace пробую
                 doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
                 textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
                 t++;
-
             }
             else if (t == 3)
             {
                 DoubleAnimation doubleAnimation = new DoubleAnimation();
-                doubleAnimation.From = 570;
+                doubleAnimation.From = 575;
                 doubleAnimation.To = 0;
                 doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
                 doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
@@ -567,43 +554,6 @@ namespace пробую
             {
                 t++;
             }
-
-            /*if (t == 5)
-            {
-                t = 0;
-                t2++;
-                if (t2 == 1)
-                {
-
-                    DoubleAnimation doubleAnimation = new DoubleAnimation();
-                    doubleAnimation.From = 0;
-                    doubleAnimation.To = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4).Length * (-1) * 11;
-                    doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
-                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
-                }
-                else if (t2 == 4)
-                {
-                    DoubleAnimation doubleAnimation = new DoubleAnimation();
-                    doubleAnimation.From = 570;
-                    doubleAnimation.To = 0;
-                    doubleAnimation.RepeatBehavior = new RepeatBehavior(1);
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(15));
-                    textbl.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
-
-                }
-                else if (t2 == 8)
-                {
-                    t2 = 0;
-                }
-
-
-
-
-
-            }
-            else
-                t++;*/
         }
     }
 }

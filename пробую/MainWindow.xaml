@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:пробую"
         mc:Ignorable="d"
-        Title="Artemida Player" Height="482" Width="592.8" Unloaded="Window_Unloaded" ResizeMode="CanMinimize">
+        Title="Artemida Player" Height="500" Width="605" Unloaded="Window_Unloaded" ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="1561182942_2.jpg"/>
     </Window.Background>
@@ -21,50 +21,37 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="82*" />
-            <ColumnDefinition Width="47*" />
-            <ColumnDefinition Width="76*" />
-            <ColumnDefinition Width="74*"/>
-            <ColumnDefinition Width="76*"/>
-            <ColumnDefinition Width="72*"/>
-            <ColumnDefinition Width="78*"/>
-            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="32*" />
+            <ColumnDefinition Width="75*" />
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="97*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="98*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
-        <Button Content="🢂"  Margin="9.8,10.2,10.2,10"  Click="Button_Click" FontSize="18"  Grid.Row="5" Grid.Column="4"/>
-        <Button x:Name="p1" Content="||"  Margin="7.4,6.2,7.2,7"   Click="Button_Click_1" FontSize="22" Grid.Row="5" Grid.Column="3"/>
-        <Button x:Name="r1" Content="▷"  Margin="7.4,6.2,7.2,7"   Click="Button_Click_2" FontSize="22"  Grid.Row="5" Grid.Column="3"/>
-        <Button Content="🢀"  Margin="10.4,10.2,9.6,10"   Click="Button_Click_3" FontSize="18" Grid.Row="5" Grid.Column="2"/>
-        <Button Content="Изменить папку"  Margin="10,10.2,9.6,10"   Click="Button_Click_4"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontFamily="Candara" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Slider x:Name="sl1"  Margin="0,15,0,0"   Orientation="Horizontal" Minimum="0" Maximum="0.5" Value="0.5" ValueChanged="sl1_ValueChanged" Grid.Row="5"  Grid.Column="5" RenderTransformOrigin="0.511,0.506" Grid.ColumnSpan="1"/>
-        <Button x:Name="button_r" Content="Random" Margin="6.8,10.2,10.4,10"  Click="Button_Click_5"  Background="#FF514F4F" Foreground="White" BorderBrush="Black" FontFamily="Candara" Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="1"/>
-        <ListBox x:Name="lb1" Margin="10,2.4,10.4,0" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="2" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8" MouseLeftButtonUp="lb1_MouseLeftButtonUp" IsSynchronizedWithCurrentItem="False" PreviewMouseRightButtonDown="lb1_PreviewMouseRightButtonDown"/>
-        <ListBox x:Name="lb4" Visibility="Hidden" Grid.ColumnSpan="8" Margin="10,2.4,10.4,0" Grid.Row="2" PreviewMouseLeftButtonUp="lb4_PreviewMouseLeftButtonUp" Grid.Column="0" PreviewMouseRightButtonDown="lb4_PreviewMouseRightButtonDown" BorderBrush="Black"/>
+        <Button Content="🢂"  Margin="10,10,10,10"  Click="Button_Click" FontSize="18"  Grid.Row="5" Grid.Column="4"/>
+        <Button x:Name="p1" Content="||"  Margin="8,8,8,8"   Click="Button_Click_1" FontSize="22" Grid.Row="5" Grid.Column="3"/>
+        <Button x:Name="r1" Content="▷"  Margin="8,8,8,8"   Click="Button_Click_2" FontSize="22"  Grid.Row="5" Grid.Column="3"/>
+        <Button Content="🢀"  Margin="10,10,10,10"   Click="Button_Click_3" FontSize="18" Grid.Row="5" Grid.Column="2"/>
+        <Button Content="Изменить папку"  Margin="10,10,10,10"   Click="Button_Click_4"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontFamily="Candara" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Slider x:Name="sl1"  Margin="0,15,0,10"   Orientation="Horizontal" Minimum="0" Maximum="0.5" Value="0.5" ValueChanged="sl1_ValueChanged" Grid.Row="5"  Grid.Column="5" RenderTransformOrigin="0.511,0.506"/>
+        <Button x:Name="button_r" Content="Random" Margin="6,10,10,10"  Click="Button_Click_5"  Background="#FF514F4F" Foreground="White" BorderBrush="Black" FontFamily="Candara" Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="1"/>
+        <ListBox x:Name="lb1" Margin="10,2,10,35" BorderBrush="White" Background="Black" Foreground="White" Grid.Row="2" Grid.Column="0" FontSize="16" Grid.ColumnSpan="8" MouseLeftButtonUp="lb1_MouseLeftButtonUp" IsSynchronizedWithCurrentItem="False" PreviewMouseRightButtonDown="lb1_PreviewMouseRightButtonDown" Grid.RowSpan="2"/>
+        <ListBox x:Name="lb4" Visibility="Hidden" Grid.ColumnSpan="8" Margin="10,2,10,35" Grid.Row="2" PreviewMouseLeftButtonUp="lb4_PreviewMouseLeftButtonUp" Grid.Column="0" PreviewMouseRightButtonDown="lb4_PreviewMouseRightButtonDown" BorderBrush="Black" Grid.RowSpan="2"/>
 
-        <Label x:Name="lb2" Content="00:00:00"  Margin="10,1.2,0.4,47"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="0" Grid.RowSpan="2"/>
-        <Label x:Name="lb3" Content="00:00:00" Margin="0.4,1.2,0.4,47"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="7" Grid.RowSpan="2"/>
-        <Canvas x:Name="Canvas" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="3" Margin="10,0,10.4,31.8" Grid.RowSpan="2">
-            <TextBlock x:Name="textbl" Margin="0,7,0,0" FontSize="19" Foreground="White" Text="Тестовый текст" Canvas.Left="0" FontFamily="Consolas">
-                <!--TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)" From="570"  To="-750" Duration="0:0:15" RepeatBehavior="Forever"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBlock.Triggers/-->
-            </TextBlock>
+        <Label x:Name="lb2" Content="00:00:00"  Margin="7,0,3,50"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="0" Grid.RowSpan="2"/>
+        <Label x:Name="lb3" Content="00:00:00" Margin="30,0,3,0"  Foreground="White" FontSize="14" Grid.Row="4" Grid.Column="7"/>
+        <Canvas x:Name="Canvas" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="3" Margin="10,0,10,4">
+            <TextBlock x:Name="textbl" Margin="0,7,0,0" FontSize="19" Foreground="White" Text="Тестовый текст" Canvas.Left="0" FontFamily="Consolas"/>
         </Canvas>
-        <!--Label x:Name="song" Margin="10,0,0,0" Foreground="White" FontSize="18" FontFamily="Consolas" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="3" Content="song"/-->
-        <Slider x:Name="sl2"  Margin="80,5.2,80.4,4.8" Grid.Row="4" Grid.ColumnSpan="8" Minimum="0" PreviewMouseUp="sl2_PreviewMouseUp"/>
-        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="10,0.2,10.4,4.6" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Column="0" Grid.Row="1"/>
-        <Menu Grid.ColumnSpan="8" Margin="10,0,10.4,4.8" Grid.Row="0" Background="Black" Foreground="White">
+        <Slider x:Name="sl2"  Margin="75,5,76,5" Grid.Row="4" Grid.ColumnSpan="8" Minimum="0" PreviewMouseUp="sl2_PreviewMouseUp"/>
+        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="10,0,10,5" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Column="0" Grid.Row="1"/>
+        <Menu Grid.ColumnSpan="8" Margin="10,0,10,5" Grid.Row="0" Background="Black" Foreground="White">
             <MenuItem Header="Файл" Background="Black" Foreground="White">
                 <MenuItem Header="Папка по умолчанию" Background="Black" Foreground="White" >
                     <MenuItem Header="Изменить" Click="MenuItem_Click_2" Background="Black" Foreground="White"/>

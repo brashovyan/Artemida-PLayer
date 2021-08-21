@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:пробую"
         mc:Ignorable="d"
-        Title="О программе" Height="337.245" Width="581.602">
+        Title="О программе" Height="337.245" Width="581.602" ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="1561182942_2.jpg"/>
     </Window.Background>
