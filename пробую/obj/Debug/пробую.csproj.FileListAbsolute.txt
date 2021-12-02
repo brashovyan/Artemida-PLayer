@@ -17,3 +17,4 @@ C:\Games\япву\пробую\пробую\obj\Debug\Window1.baml
 C:\Games\япву\пробую\пробую\obj\Debug\Window2.g.cs
 C:\Games\япву\пробую\пробую\obj\Debug\Window2.baml
 C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.AssemblyReference.cache
+C:\Games\япву\пробую\пробую\obj\Debug\пробую.csproj.SuggestedBindingRedirects.cache

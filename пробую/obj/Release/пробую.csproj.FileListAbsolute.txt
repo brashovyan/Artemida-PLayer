@@ -17,3 +17,4 @@ C:\Games\япву\пробую\пробую\obj\Release\Window1.g.cs
 C:\Games\япву\пробую\пробую\obj\Release\Window2.g.cs
 C:\Games\япву\пробую\пробую\obj\Release\Window1.baml
 C:\Games\япву\пробую\пробую\obj\Release\Window2.baml
+C:\Games\япву\пробую\пробую\obj\Release\пробую.csproj.SuggestedBindingRedirects.cache

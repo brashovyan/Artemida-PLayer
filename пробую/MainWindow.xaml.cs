@@ -88,7 +88,6 @@ namespace пробую
                     files[y] = str10[v];
                     y++;
                 }
-
             }
 
             for (int b = 0; b < files.Length; b++)
@@ -221,26 +220,18 @@ namespace пробую
                     p++;
                 else
                 {
-                    if (r == false)
-                    {
-                        player.Close();
+                    player.Close();
 
-                        if (i == files.Length - 1)
-                        {
-                            i = 0;
-                            music();
-                        }
-                        else
-                        {
-                            i++;
-                            music();
-                        }
+                    if (i == files.Length - 1)
+                    {
+                        i = 0;
+                        music();
                     }
                     else
                     {
-                        player.Close();
+                        i++;
                         music();
-                    }
+                    }             
                 }
             }
         }
