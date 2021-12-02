@@ -13,7 +13,11 @@ namespace пробую
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer(); //таймер
-        DispatcherTimer timer2 = new DispatcherTimer();
+        DispatcherTimer timer2 = new DispatcherTimer(); //таймер для анимации
+
+        DispatcherTimer timer3 = new DispatcherTimer(); //таймер для гачи
+        MediaPlayer player2 = new MediaPlayer(); //плеер гачи
+
         MediaPlayer player = new MediaPlayer(); //сам плеер
         string[] files; //сами треки
         int i; //какой по счету трек
@@ -72,7 +76,7 @@ namespace пробую
             for (int v = 0; v < str10.Length; v++)
             {
                 FileInfo fi = new FileInfo(str10[v]);
-                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv" || fi.Extension == ".ogg")
                 {
                     y++;
                 }
@@ -83,7 +87,7 @@ namespace пробую
             for (int v = 0; v < str10.Length; v++)
             {
                 FileInfo fi = new FileInfo(str10[v]);
-                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv" || fi.Extension == ".ogg")
                 {
                     files[y] = str10[v];
                     y++;
@@ -102,6 +106,10 @@ namespace пробую
 
             timer2.Tick += new EventHandler(timerTick2);
             timer2.Interval = new TimeSpan(0, 0, 5);
+
+            timer3.Tick += new EventHandler(gachi);
+            timer3.Interval = new TimeSpan(0, 0, 10);
+            
             music();
         }
 
@@ -112,13 +120,15 @@ namespace пробую
                 p = 0;
                 timer.Stop();
                 timer2.Stop();
+                timer3.Stop();
+                player2.Stop();
                 player.Volume = sl1.Value;
                 t = 0;
                 if (k == false)
                 {
                     player.Open(new Uri(files[i], UriKind.Relative));
                     str5 = files[i].Split('\\');
-                    textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                    textbl.Text = "♂"+str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4)+"♂";
                     textbl.BeginAnimation(Canvas.LeftProperty, null); //остановка анимации
                     lb1.SelectedIndex = i;
                     button_r.Content = "Random: выкл";
@@ -128,7 +138,7 @@ namespace пробую
                 {
                     player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
                     str5 = files[rnd2[i]].Split('\\');
-                    textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
+                    textbl.Text = "♂"+str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4)+"♂";
                     textbl.BeginAnimation(Canvas.LeftProperty, null);
                     lb1.SelectedIndex = rnd2[i];
                     button_r.Content = "Random: вкл";
@@ -140,6 +150,7 @@ namespace пробую
                 sl2.Value = 0;
                 timer.Start();
                 timer2.Start();
+                timer3.Start();
             }
             catch (Exception)
             {
@@ -249,6 +260,7 @@ namespace пробую
         {
             player.Pause();
             timer.Stop();
+            timer3.Stop();
             r1.Visibility = Visibility.Visible;
             p1.Visibility = Visibility.Hidden;
         }
@@ -257,6 +269,7 @@ namespace пробую
         {
             player.Play();
             timer.Start();
+            timer3.Start();
             p1.Visibility = Visibility.Visible;
             r1.Visibility = Visibility.Hidden;
         }
@@ -294,7 +307,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv" || fi.Extension == ".ogg")
                     {
                         y++;
                     }
@@ -305,7 +318,7 @@ namespace пробую
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
-                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv" || fi.Extension == ".ogg")
                     {
                         files[y] = str10[v];
                         y++;
@@ -315,6 +328,7 @@ namespace пробую
                 lb1.Items.Clear();
                 player.Close();
                 timer.Stop();
+                timer3.Stop();
                 button_r.Content = "Random: выкл";
                 i = 0;
                 k = false;
@@ -554,6 +568,29 @@ namespace пробую
             {
                 t++;
             }
+
+        }
+
+        private async void gachi(object sender, EventArgs e)
+        {
+            try
+            {
+                timer3.Interval = new TimeSpan(0, 0, rnd.Next(5,15));
+                string[] gc = Directory.GetFiles("gachi");
+                player2.Open(new Uri(gc[rnd.Next(gc.Length)], UriKind.Relative));
+                player2.Play();
+                player2.Volume = sl1.Value*3;
+                player.Volume /= 3;
+                await System.Threading.Tasks.Task.Delay(1000);
+                await System.Threading.Tasks.Task.Delay(TimeSpan.Parse(player2.NaturalDuration.ToString()));
+
+                player.Volume = sl1.Value;
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось найти папку с гачи!");
+            }
+            
         }
     }
 }

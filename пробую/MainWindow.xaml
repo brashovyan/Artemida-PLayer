@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:пробую"
         mc:Ignorable="d"
-        Title="Artemida Player" Height="500" Width="605" Unloaded="Window_Unloaded" ResizeMode="CanMinimize">
+        Title="Artemida ♂Gachi♂ Player" Height="500" Width="605" Unloaded="Window_Unloaded" ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="1561182942_2.jpg"/>
     </Window.Background>
