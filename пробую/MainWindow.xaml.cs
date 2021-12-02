@@ -232,26 +232,18 @@ namespace пробую
                     p++;
                 else
                 {
-                    if (r == false)
-                    {
-                        player.Close();
+                    player.Close();
 
-                        if (i == files.Length - 1)
-                        {
-                            i = 0;
-                            music();
-                        }
-                        else
-                        {
-                            i++;
-                            music();
-                        }
+                    if (i == files.Length - 1)
+                    {
+                        i = 0;
+                        music();
                     }
                     else
                     {
-                        player.Close();
+                        i++;
                         music();
-                    }
+                    }              
                 }
             }
         }
