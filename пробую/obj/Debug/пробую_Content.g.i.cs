@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("8_original.jpeg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("xt7playermpv_94294.ico")]
 
 

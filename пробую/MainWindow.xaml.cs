@@ -120,6 +120,7 @@ namespace пробую
                     textbl.Text = str5[str5.Length - 1].Remove(str5[str5.Length - 1].Length - 4);
                     textbl.BeginAnimation(Canvas.LeftProperty, null); //остановка анимации
                     lb1.SelectedIndex = i;
+                
                     button_r.Content = "Random: выкл";
                     player.Play();
                 }
@@ -154,7 +155,7 @@ namespace пробую
         private void Button_Click(object sender, RoutedEventArgs e) //следующая песня
         {
             player.Close();
-            if (i == files.Length - 1)
+            if (i >= files.Length - 1)
             {
                 i = 0;
                 ser.Text = "";
@@ -196,7 +197,7 @@ namespace пробую
                     {
                         player.Close();
 
-                        if (i == files.Length - 1)
+                        if (i >= files.Length - 1)
                         {
                             i = 0;
                             music();
@@ -380,6 +381,7 @@ namespace пробую
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
+                music();
             }
             else
             {
@@ -389,8 +391,8 @@ namespace пробую
                 lb4.Items.Clear();
                 lb4.Visibility = Visibility.Hidden;
                 lb1.Visibility = Visibility.Visible;
-            }
-            music();
+                button_r.Content = "Random: выкл";
+            }     
         }
 
         private void lb1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) //выбор песни
@@ -465,12 +467,7 @@ namespace пробую
             w2.ShowDialog();
         }
 
-        private void lb1_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) //запрещаем пкм в списке песен
-        {
-            e.Handled = true;
-        }
-
-        private void lb4_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) //запрещаем пкм в списке песен
+        private void lb4_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) //запрещаем пкм в списке песен поиск
         {
             e.Handled = true;
         }
@@ -545,6 +542,274 @@ namespace пробую
             {
                 t++;
             }
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e) //контекст меню свойства песни 
+        {
+            var index = lb1.SelectedIndex;
+
+            if (k == false)
+            {
+                lb1.SelectedIndex = i;
+            }
+            else
+            {
+                lb1.SelectedIndex = rnd2[i];
+            }
+
+            FileInfo fi = new FileInfo(files[index]);
+            double l = fi.Length;
+            l = Math.Round(l / 1048576, 2);
+
+            MessageBox.Show($"Название: {fi.Name}\nРазмер: {l} мб\nРасположение: {fi.Directory}\\{fi.Name}", "Свойства");
+        }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e) //контекст меню удаления песни 
+        {
+            var index = lb1.SelectedIndex;
+            FileInfo fi2 = new FileInfo(files[index]);
+            string dir = fi2.Directory.ToString();
+            
+            if (MessageBox.Show($"Вы точно хотите удалить с компьютера {fi2.Name}?",
+                    "Удаление",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                
+                if (k == false)
+                {
+                    if (i != index)
+                    {
+                        fi2.Delete();
+
+                        y = 0;
+                        str10 = Directory.GetFiles(dir);
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                y++;
+                            }
+                        }
+
+                        files = new string[y];
+                        y = 0;
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                files[y] = str10[v];
+                                y++;
+                            }
+                        }
+
+                        lb1.Items.Clear();
+                        button_r.Content = "Random: выкл";
+                        k = false;
+                        ser.Text = "";
+                        lb4.Items.Clear();
+                        lb4.Visibility = Visibility.Hidden;
+                        lb1.Visibility = Visibility.Visible;
+
+                        for (int b = 0; b < files.Length; b++)
+                        {
+                            str5 = files[b].Split('\\');
+                            lb1.Items.Add(str5[str5.Length - 1]);
+                        }
+
+                        if(index < i)
+                        {
+                            i = i - 1;
+                            lb1.SelectedIndex = i;
+                        }
+                        else
+                        {
+                            lb1.SelectedIndex = i;
+                        }
+
+                        MessageBox.Show("Удалено!");
+                    }
+
+                    else
+                    {
+                        player.Close();
+                        timer.Stop();
+
+                        fi2.Delete();
+
+                        y = 0;
+                        str10 = Directory.GetFiles(dir);
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                y++;
+                            }
+                        }
+
+                        files = new string[y];
+                        y = 0;
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                files[y] = str10[v];
+                                y++;
+                            }
+                        }
+
+                        lb1.Items.Clear();
+                        button_r.Content = "Random: выкл";
+                        k = false;
+                        textbl.Text = "";
+                        lb2.Content = "00:00:00";
+                        lb3.Content = "00:00:00";
+                        ser.Text = "";
+                        lb4.Items.Clear();
+                        lb4.Visibility = Visibility.Hidden;
+                        lb1.Visibility = Visibility.Visible;
+
+                        for (int b = 0; b < files.Length; b++)
+                        {
+                            str5 = files[b].Split('\\');
+                            lb1.Items.Add(str5[str5.Length - 1]);
+                        }
+
+                        i = i - 1;
+
+                        Button_Click(sender, e);
+
+                        MessageBox.Show("Удалено!");
+                    }
+                }
+                else
+                {
+                    if (index != rnd2[i])
+                    {
+                        fi2.Delete();
+
+                        y = 0;
+                        str10 = Directory.GetFiles(dir);
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                y++;
+                            }
+                        }
+
+                        files = new string[y];
+                        y = 0;
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                files[y] = str10[v];
+                                y++;
+                            }
+                        }
+
+                        lb1.Items.Clear();
+                        button_r.Content = "Random: выкл";
+                        k = false;
+                        ser.Text = "";
+                        lb4.Items.Clear();
+                        lb4.Visibility = Visibility.Hidden;
+                        lb1.Visibility = Visibility.Visible;
+
+                        for (int b = 0; b < files.Length; b++)
+                        {
+                            str5 = files[b].Split('\\');
+                            lb1.Items.Add(str5[str5.Length - 1]);
+                        }
+
+                        i = rnd2[i];
+
+                        if (index < i)
+                        {
+                            i = i - 1;
+                            lb1.SelectedIndex = i;
+                        }
+                        else
+                        {
+                            lb1.SelectedIndex = i;
+                        }
+
+                        MessageBox.Show("Удалено!");
+                    }
+
+                    else
+                    {
+                        player.Close();
+                        timer.Stop();
+
+                        fi2.Delete();
+
+                        y = 0;
+                        str10 = Directory.GetFiles(dir);
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                y++;
+                            }
+                        }
+
+                        files = new string[y];
+                        y = 0;
+                        for (int v = 0; v < str10.Length; v++)
+                        {
+                            FileInfo fi = new FileInfo(str10[v]);
+                            if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                            {
+                                files[y] = str10[v];
+                                y++;
+                            }
+                        }
+
+                        lb1.Items.Clear();
+                        button_r.Content = "Random: выкл";
+                        k = false;
+                        textbl.Text = "";
+                        lb2.Content = "00:00:00";
+                        lb3.Content = "00:00:00";
+                        ser.Text = "";
+                        lb4.Items.Clear();
+                        lb4.Visibility = Visibility.Hidden;
+                        lb1.Visibility = Visibility.Visible;
+
+                        for (int b = 0; b < files.Length; b++)
+                        {
+                            str5 = files[b].Split('\\');
+                            lb1.Items.Add(str5[str5.Length - 1]);
+                        }
+                        i = i - 1;
+                        
+                        Button_Click(sender, e);
+
+                        MessageBox.Show("Удалено!");
+                    }
+                }
+            }
+        }
+
+        private void lb1_ContextMenuClosing(object sender, ContextMenuEventArgs e) //закрытие контекстного меню
+        {
+            if(k == false)
+            {
+                lb1.SelectedIndex = i;
+            }
+            else
+            {
+                lb1.SelectedIndex = rnd2[i];
+            }         
         }
     }
 }
