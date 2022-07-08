@@ -14,7 +14,7 @@ namespace пробую
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer(); //таймер
-        DispatcherTimer timer2 = new DispatcherTimer();
+        DispatcherTimer timer2 = new DispatcherTimer(); //таймер для анимации
         MediaPlayer player = new MediaPlayer(); //сам плеер
         string[] files; //сами треки
         int i; //какой по счету трек
@@ -27,8 +27,8 @@ namespace пробую
         int y; //нужно для проверки папки
         int p; //ждем 5 секунд, чтобыпесня прогрузилась  
         bool r = false; //для конопки повтора
-        int t;
-        bool move_sl2 = true;
+        int t; //для анимации
+        bool move_sl2 = true; //для движения главного слайдера
 
         public MainWindow()
         {
@@ -45,7 +45,7 @@ namespace пробую
             i = 0;
             button_r.Content = "Random: off";
             h:
-            if (Properties.Settings.Default.papka3 == "")
+            if (Properties.Settings.Default.papka3 == "") // если нет папки по умолчанию
             {
                 System.Windows.Forms.FolderBrowserDialog FBD = new System.Windows.Forms.FolderBrowserDialog();
                 if (FBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -63,7 +63,7 @@ namespace пробую
                     Environment.Exit(0);
                 }
             }
-            else
+            else // если папка по умолчанию есть
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace пробую
 
             files = new string[y];
             y = 0;
-            for (int v = 0; v < str10.Length; v++)
+            for (int v = 0; v < str10.Length; v++) // заполняется список песен
             {
                 FileInfo fi = new FileInfo(str10[v]);
                 if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
@@ -114,7 +114,7 @@ namespace пробую
             music();
         }
 
-        private void thumb_MouseEnter2(object sender, MouseEventArgs e) //для главного слайдера
+        private void thumb_MouseEnter2(object sender, MouseEventArgs e) //для работы главного слайдера
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.MouseDevice.Captured == null)
             {
@@ -125,7 +125,7 @@ namespace пробую
             }
         }
 
-        private void thumb_MouseEnter(object sender, MouseEventArgs e) //для слайдера громкости
+        private void thumb_MouseEnter(object sender, MouseEventArgs e) //для работы слайдера громкости
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.MouseDevice.Captured == null)
             {
@@ -144,7 +144,7 @@ namespace пробую
                 timer2.Stop();
                 player.Volume = sl1.Value / 200;
                 t = 0;
-                if (k == false)
+                if (k == false) // если случайное произведение выключено
                 {
                     player.Open(new Uri(files[i], UriKind.Relative));
                     str5 = files[i].Split('\\');
@@ -155,7 +155,7 @@ namespace пробую
                     button_r.Content = "Random: выкл";
                     player.Play();
                 }
-                else
+                else //если случайное воспроизведение включено
                 {
                     player.Open(new Uri(files[rnd2[i]], UriKind.Relative));
                     str5 = files[rnd2[i]].Split('\\');
@@ -189,19 +189,11 @@ namespace пробую
             if (i >= files.Length - 1)
             {
                 i = 0;
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
                 music();
             }
             else
             {
                 i++;
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
                 music();
             }
         }
@@ -222,7 +214,7 @@ namespace пробую
                 sl2_move();
                 lb2.Content = player.Position.ToString().Remove(8);
                 
-                if (player.Position == player.NaturalDuration)
+                if (player.Position == player.NaturalDuration) // если песня закончилась
                 {
                     if (r == false)
                     {
@@ -246,7 +238,7 @@ namespace пробую
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception) // если плеер 5 секунд не может воспроизвести песню, то включает следующую
             {
                 if (p != 5)
                     p++;
@@ -290,19 +282,11 @@ namespace пробую
             if (i == 0)
             {
                 i = files.Length-1;
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
                 music();
             }
             else
             {
                 i--;
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
                 music();
             }
         }
@@ -341,7 +325,6 @@ namespace пробую
                 button_r.Content = "Random: выкл";
                 i = 0;
                 k = false;
-                //song.Content = "";
                 textbl.Text = "";
                 lb2.Content = "00:00:00";
                 lb3.Content = "00:00:00";
@@ -357,9 +340,6 @@ namespace пробую
                 }
                 music(); 
             }
-            else
-            {
-            }
         }
 
         private void sl1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //громкость
@@ -371,27 +351,20 @@ namespace пробую
         {
             try
             {
-                
                 move_sl2 = true;
-                //timer.Stop();
                 player.Volume = sl1.Value / 200;
                 player.Position = TimeSpan.FromSeconds(sl2.Value);
-                //p1.Visibility = Visibility.Visible;
-                //r1.Visibility = Visibility.Hidden;
-                //player.Play();
-                //timer.Start();
             }
             catch (Exception)
             {
                 MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
             }
         }
-        
-        private void Button_Click_5(object sender, RoutedEventArgs e) //random
+
+        private void Random()
         {
-            if (k == false)
+            if (k == true)
             {
-                k = true;
                 rnd2 = new int[files.Length];
                 for (int b = 0; b < files.Length; b++)
                 {
@@ -410,21 +383,35 @@ namespace пробую
                     rnd2[b] = j;
                 }
 
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
-                music();
+                for (int b2 = 0; b2 < files.Length; b2++)
+                {
+                    if (rnd2[b2] == i)
+                    {
+                        i = b2;
+                        break;
+                    }
+                }
+
+                button_r.Content = "Random: вкл";
+            }
+            else
+            {
+                i = rnd2[i];
+                button_r.Content = "Random: выкл";
+            }
+        }
+        
+        private void Button_Click_5(object sender, RoutedEventArgs e) //случайное воспроизведение
+        {
+            if (k == false)
+            {
+                k = true;
+                Random();
             }
             else
             {
                 k = false;
-                i = rnd2[i];
-                ser.Text = "";
-                lb4.Items.Clear();
-                lb4.Visibility = Visibility.Hidden;
-                lb1.Visibility = Visibility.Visible;
-                button_r.Content = "Random: выкл";
+                Random();
             }     
         }
 
@@ -437,7 +424,7 @@ namespace пробую
             else
             {
                 i = lb1.SelectedIndex;
-                k = false;
+                Random();
             }
             music();
         }
@@ -450,12 +437,14 @@ namespace пробую
               
                 if (searchText == "")
                 {
+                    src_button.Visibility = Visibility.Hidden;
                     lb4.Items.Clear();
                     lb4.Visibility = Visibility.Hidden;
                     lb1.Visibility = Visibility.Visible;
                 }
                 else
                 {
+                    src_button.Visibility = Visibility.Visible;
                     lb4.Visibility = Visibility.Visible;
                     lb1.Visibility = Visibility.Hidden;
                     lb4.Items.Clear();
@@ -482,7 +471,10 @@ namespace пробую
                     if (files[b].ToString().Contains(str11))
                     {
                         i = b;
-                        k = false;
+                        if (k == true)
+                        {
+                            Random();
+                        }
                         ser.Text = "";
                         lb4.Items.Clear();
                         lb4.Visibility = Visibility.Hidden;
@@ -873,6 +865,15 @@ namespace пробую
             {
                 sl2.Value = TimeSpan.Parse(player.Position.ToString()).TotalSeconds;
             }
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e) //кнопка отчистки строки поиска
+        {
+            src_button.Visibility = Visibility.Hidden;
+            ser.Text = "";
+            lb4.Items.Clear();
+            lb4.Visibility = Visibility.Hidden;
+            lb1.Visibility = Visibility.Visible;
         }
     }
 }

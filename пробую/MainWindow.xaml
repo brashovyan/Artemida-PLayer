@@ -59,7 +59,7 @@
             <TextBlock x:Name="textbl" Margin="0,7,0,0" FontSize="19" Foreground="White" Text="Тестовый текст" Canvas.Left="0" FontFamily="Consolas"/>
         </Canvas>
         <Slider x:Name="sl2"  Margin="75,5,76,5" Grid.Row="4" Grid.ColumnSpan="8" Minimum="0" IsMoveToPointEnabled="True" PreviewMouseLeftButtonUp="sl2_PreviewMouseLeftButtonUp"/>
-        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="10,0,10,5" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="ser" Grid.ColumnSpan="8" Margin="10,0,10,5" TextWrapping="NoWrap" Text="" IsEnabled="True" TextChanged="ser_TextChanged" Grid.Column="0" Grid.Row="1" BorderBrush="White"/>
         <Menu Grid.ColumnSpan="8" Margin="10,0,10,5" Grid.Row="0" Background="Black" Foreground="White">
             <MenuItem Header="Файл" Background="Black" Foreground="White">
                 <MenuItem Header="Папка по умолчанию" Background="Black" Foreground="White" >
@@ -72,6 +72,6 @@
         </Menu>
         <Button x:Name="rep_off" Content="🔁" Grid.Column="6" Margin="10,10,10,10" Grid.Row="5"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontSize="18" Click="Button_Click_6" />
         <Button x:Name="rep_on" Content="🔂" Grid.Column="6" Margin="10,10,10,10" Grid.Row="5"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontSize="18" Visibility="Hidden" Click="rep_on_Click"/>
-
+        <Button x:Name="src_button" Grid.Column="7" Content="X" HorizontalAlignment="Left" Margin="60,1,1,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.216,0.074" Height="23" Width="26" BorderBrush="#FFCBCBCB" Background="#FFCBCBCB" Click="Button_Click_7" Visibility="Hidden"/>
     </Grid>
 </Window>
