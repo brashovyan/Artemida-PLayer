@@ -69,6 +69,10 @@
                 </MenuItem>
                 <MenuItem Header="О программе" Click="MenuItem_Click" Background="Black" Foreground="White" />
             </MenuItem>
+            <MenuItem Header="Сортировка" Background="Black" Foreground="White">
+                <MenuItem Header="По названию"  Background="Black" Foreground="White" Click="MenuItem_Click_7"/>
+                <MenuItem Header="По дате добавления"  Background="Black" Foreground="White" Click="MenuItem_Click_6"/>
+            </MenuItem>
         </Menu>
         <Button x:Name="rep_off" Content="🔁" Grid.Column="6" Margin="10,10,10,10" Grid.Row="5"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontSize="18" Click="Button_Click_6" />
         <Button x:Name="rep_on" Content="🔂" Grid.Column="6" Margin="10,10,10,10" Grid.Row="5"  BorderBrush="Black" Background="#FF514F4F" Foreground="White" FontSize="18" Visibility="Hidden" Click="rep_on_Click"/>

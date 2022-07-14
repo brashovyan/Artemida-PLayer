@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
+using System.Linq;
 //через добавить ссылку в обозревателе решений добавил Windows.Forms
 
 namespace пробую
@@ -29,6 +30,7 @@ namespace пробую
         bool r = false; //для конопки повтора
         int t; //для анимации
         bool move_sl2 = true; //для движения главного слайдера
+        string selected_directory;
 
         public MainWindow()
         {
@@ -57,6 +59,7 @@ namespace пробую
                         Properties.Settings.Default.papka3 = FBD.SelectedPath;
                         Properties.Settings.Default.Save();
                     }
+                    selected_directory = FBD.SelectedPath;
                 }
                 else
                 {
@@ -68,6 +71,7 @@ namespace пробую
                 try
                 {
                     str10 = Directory.GetFiles(Properties.Settings.Default.papka3);
+                    selected_directory = Properties.Settings.Default.papka3;
                 }
                 catch
                 {
@@ -78,7 +82,7 @@ namespace пробую
                 }
             }
 
-            y = 0;                   
+            y = 0;
             for (int v = 0; v < str10.Length; v++)
             {
                 FileInfo fi = new FileInfo(str10[v]);
@@ -298,6 +302,7 @@ namespace пробую
             {
                 y = 0;
                 str10 = Directory.GetFiles(FBD.SelectedPath);
+                selected_directory = FBD.SelectedPath;
                 for (int v = 0; v < str10.Length; v++)
                 {
                     FileInfo fi = new FileInfo(str10[v]);
@@ -396,8 +401,16 @@ namespace пробую
             }
             else
             {
-                i = rnd2[i];
-                button_r.Content = "Random: выкл";
+                try
+                {
+                    i = rnd2[i];
+                    button_r.Content = "Random: выкл";
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
+                }
+                
             }
         }
         
@@ -874,6 +887,175 @@ namespace пробую
             lb4.Items.Clear();
             lb4.Visibility = Visibility.Hidden;
             lb1.Visibility = Visibility.Visible;
+        }
+
+        private void MenuItem_Click_6(object sender, RoutedEventArgs e) //сортировка по дате добавления
+        {
+            try
+            {
+                var str11 = new DirectoryInfo(selected_directory).GetFiles().OrderByDescending(f => f.LastWriteTime).ToList();
+                // получаем все файлы в папке, сразу отсортированные
+                string song_now = "";
+
+                if(k == false)
+                {
+                    song_now = files[i];
+                }
+                else
+                {
+                    song_now = files[rnd2[i]];
+                }
+                
+
+                int v5 = 0;
+                foreach (var f in str11)
+                {
+                    str10[v5] = f.FullName; // перезаполняем массивы с песнями
+                    v5++;
+                }
+
+                y = 0;
+                for (int v = 0; v < str10.Length; v++)
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    {
+                        y++;
+                    }
+                }
+
+                files = new string[y];
+                y = 0;
+                for (int v = 0; v < str10.Length; v++) // заполняется список песен
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    {
+                        files[y] = str10[v];
+                        y++;
+                    }
+                }
+
+                lb1.Items.Clear();
+                for (int b = 0; b < files.Length; b++)
+                {
+                    str5 = files[b].ToString().Split('\\');
+                    lb1.Items.Add(str5[str5.Length - 1]);
+                }
+
+                for(int b = 0; b < files.Length; b++)
+                {
+                    if (files[b] == song_now)
+                    {
+                        if (k == false)
+                        {
+                            i = b;
+                            lb1.SelectedIndex = i;
+                            break;
+                        }
+                        else
+                        {
+                            for (int b2 = 0; b2 < files.Length; b2++)
+                            {
+                                if (rnd2[b2] == b)
+                                {
+                                    i = b2;
+                                    lb1.SelectedIndex = rnd2[b2];
+                                    break;
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
+                //MessageBox.Show(ex.Message);
+            }   
+        }
+
+        private void MenuItem_Click_7(object sender, RoutedEventArgs e) //сортировка по названию
+        {
+            try 
+            {
+                str10 = Directory.GetFiles(selected_directory);
+
+                string song_now = "";
+
+                if (k == false)
+                {
+                    song_now = files[i];
+                }
+                else
+                {
+                    song_now = files[rnd2[i]];
+                }
+
+                y = 0;
+                for (int v = 0; v < str10.Length; v++)
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    {
+                        y++;
+                    }
+                }
+
+                files = new string[y];
+                y = 0;
+                for (int v = 0; v < str10.Length; v++) // заполняется список песен
+                {
+                    FileInfo fi = new FileInfo(str10[v]);
+                    if (fi.Extension == ".mp3" || fi.Extension == ".mp4" || fi.Extension == ".wav" || fi.Extension == ".flac" || fi.Extension == ".m4a" || fi.Extension == ".m4v" || fi.Extension == ".mp4v" || fi.Extension == ".mpg" || fi.Extension == ".mkv")
+                    {
+                        files[y] = str10[v];
+                        y++;
+                    }
+                }
+
+                lb1.Items.Clear();
+                for (int b = 0; b < files.Length; b++)
+                {
+                    str5 = files[b].ToString().Split('\\');
+                    lb1.Items.Add(str5[str5.Length - 1]);
+                }
+
+                for (int b = 0; b < files.Length; b++)
+                {
+                    if (files[b] == song_now)
+                    {
+                        if (k == false)
+                        {
+                            i = b;
+                            lb1.SelectedIndex = i;
+                            break;
+                        }
+                        else
+                        {
+                            for (int b2 = 0; b2 < files.Length; b2++)
+                            {
+                                if (rnd2[b2] == b)
+                                {
+                                    i = b2;
+                                    lb1.SelectedIndex = rnd2[b2];
+                                    break;
+                                }
+                            }
+                        }
+                        
+
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Возможно вы выбрали пустую папку или в ней нет музыки.");
+            }
+            
         }
     }
 }
