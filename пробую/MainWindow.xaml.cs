@@ -116,6 +116,11 @@ namespace пробую
             timer2.Tick += new EventHandler(timerTick2);
             timer2.Interval = new TimeSpan(0, 0, 5);
             music();
+
+            player.Pause();
+            timer.Stop();
+            r1.Visibility = Visibility.Visible;
+            p1.Visibility = Visibility.Hidden;
         }
 
         private void thumb_MouseEnter2(object sender, MouseEventArgs e) //для работы главного слайдера
@@ -343,7 +348,12 @@ namespace пробую
                     str5 = files[b].Split('\\');
                     lb1.Items.Add(str5[str5.Length - 1]);
                 }
-                music(); 
+                music();
+                player.Pause();
+                timer.Stop();
+                r1.Visibility = Visibility.Visible;
+                p1.Visibility = Visibility.Hidden;
+
             }
         }
 

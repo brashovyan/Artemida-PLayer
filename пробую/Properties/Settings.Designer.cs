@@ -37,7 +37,7 @@ namespace пробую.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.61")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.62")]
         public string version {
             get {
                 return ((string)(this["version"]));
